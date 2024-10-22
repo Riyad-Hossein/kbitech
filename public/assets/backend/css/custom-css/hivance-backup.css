@@ -1,0 +1,135 @@
+.wh-35 {
+    width: 35px;
+    height: 35px;
+}
+
+.vendor-onboard-wrapper {
+    border: 2px dashed #e43d12;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+
+
+    .vendor-view-item{
+        flex-basis: 49%;
+
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 6px;
+
+        &:nth-child(1){
+            flex-basis: 100%;
+        }
+        &:nth-child(2){
+            flex-basis: 100%;
+        }
+
+        h4{
+            font-size: 12px;
+            margin-bottom: 4px;
+            padding: 5px 10px;
+            background: #3f51b50a;
+            color: #3f51b5;
+            border-radius: 6px;
+        }
+        p{
+            font-size: 16px;
+            color: #222;
+            font-weight: 400;
+        }
+
+        .v-company-service{
+            .view-pdf {
+                color: red;
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: 600;
+            }
+        }
+    }
+    .vendor-view-item.address-view {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+        div{
+            flex-basis: 32%;
+
+            &:nth-child(1){
+                flex-basis: 100%;
+            }
+        }
+       
+
+    }
+    .vendor-view-item .company-name {
+        
+
+        h4{
+            font-size: 12px;
+            margin-bottom: 4px;
+            padding: 5px 10px;
+            background: #3f51b50a;
+            color: #3f51b5;
+            border-radius: 6px;
+        }
+        p{
+            font-size: 16px;
+            color: #222;
+            font-weight: 400;
+        }
+    }
+    .address-view{
+        margin-bottom: 10px;
+        h4{
+            font-size: 12px;
+            margin-bottom: 4px;
+            padding: 5px 10px;
+            background: #3f51b50a;
+            color: #3f51b5;
+            border-radius: 6px;
+        
+        }
+        p{
+            font-size: 16px;
+            color: #222;
+            font-weight: 400;
+        }
+    }
+}
+
+.default-table-area .table-responsive .table tbody tr td a h6, .default-table-area .table-responsive .table tbody tr td a .h6 {
+    margin-left: 0 !important;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .vendor-onboard-wrapper {
+        padding: 15px;
+
+        .vendor-view-item {
+            flex-basis: 100%;
+        }
+        .vendor-view-item.address-view {
+            div{
+                flex-basis: 100% ;
+            }
+        }
+    }
+    .default-table-area .table-responsive .table thead tr th {
+        font-weight: 700 !important;
+        font-size: 12px !important;
+        padding: 10px !important;
+      
+    }
+    .default-table-area .table-responsive .table tbody tr td {
+      
+        font-size: 13px !important;
+        padding: 10px !important;
+    }
+   
+}
