@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -56,6 +57,16 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::get('/{id}/edit', [LocationController::class, 'edit'])->name('admin.location.edit');
             Route::post('/{id}/update', [LocationController::class, 'update'])->name('admin.location.update');
             Route::get('/{id}/delete', [LocationController::class, 'delete'])->name('admin.location.delete');
+        });
+
+        Route::group(['prefix' => 'service-category'], function () {
+            Route::get('/', [ServiceCategoryController::class, 'index'])->name('admin.service-category.index');
+            Route::post('/filtered', [ServiceCategoryController::class, 'indexFiltered'])->name('admin.service-category.filtered');
+            Route::get('/create', [ServiceCategoryController::class, 'create'])->name('admin.service-category.create');
+            Route::post('/create', [ServiceCategoryController::class, 'store'])->name('admin.service-category.store');
+            Route::get('/{id}/edit', [ServiceCategoryController::class, 'edit'])->name('admin.service-category.edit');
+            Route::post('/{id}/update', [ServiceCategoryController::class, 'update'])->name('admin.service-category.update');
+            Route::get('/{id}/delete', [ServiceCategoryController::class, 'delete'])->name('admin.service-category.delete');
         });
 
         Route::group(['prefix' => 'vendors'], function () {

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessType extends Model
+class ServiceCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'business_types';
+    protected $table = 'service_categories';
     public $timestamps = false;
 
     const STATUS_INACTIVE = 0;
@@ -28,6 +28,7 @@ class BusinessType extends Model
 
 
     protected $fillable = [
+        'business_type_id',
         'name',
         'image',
         'status',
@@ -40,11 +41,7 @@ class BusinessType extends Model
         'deleted_by'
     ];
 
-    public function getShowImageAttribute()
-    {
-        if ($this->image != null && $this->image != '') {
-            return asset($this->image);
-        }
-        return asset('assets/images/placeholder.jpg');
+    public function business_type(){
+        return $this->belongsTo(BusinessType::class);
     }
 }
