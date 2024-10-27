@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\BusinessType;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class BusinessTypeSeeder extends Seeder
 {
@@ -29,6 +32,7 @@ class BusinessTypeSeeder extends Seeder
             BusinessType::create([
              'id' => $type['id'],
              'name' => $type['name'],
+             'slug' => Str::slug($type['name']),
              'created_at' => $type['created_at'],
            ]);
         }

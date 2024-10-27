@@ -9,7 +9,7 @@
                 <div class="mcpb-wrap">
                     <div class="d-sm-flex text-center justify-content-between align-items-center ">
                         <div class="search-box-wrapper src-form position-relative">
-                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search location">
+                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search category">
                             <button type="submit" onclick="getData()" class="src-btn position-absolute top-50 end-0 translate-middle-y bg-transparent p-0 border-0">
                                 <i data-feather="search"></i>
                             </button>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="mcbb-wrap">
                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addPartnerModal" class="btn btn-primary text-white fw-semibold py-2 px-3 w-sm-100 mt-3 mt-sm-0">
-                        <span class="py-1 d-block"><i class="fa-duotone fa-plus me-1"></i>Add Location </span>
+                        <span class="py-1 d-block"><i class="fa-duotone fa-plus me-1"></i>Add Category </span>
                     </a>
                 </div>
             </div>
@@ -32,16 +32,26 @@
 @endsection
 
 @section('modals')
-    @include('backend.location._add_location_modal')
-    @include('backend.location._edit_location_modal')
+    @include('backend.service._add_service_modal')
+    @include('backend.service._edit_service_modal')
+@endsection
+
+@section('css')
 @endsection
 
 @section('css_plugins')
     <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/select2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
 @endsection
 
 @section('js_plugins')
     <script src="{{ asset('assets/backend') }}/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <!-- Include CKEditor from CDN -->
+    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
 @endsection
 
 @section('js')
@@ -98,10 +108,39 @@
                 initializeSelect();
             });
 
+            FilePond.registerPlugin(FilePondPluginImagePreview);
+            function initializeFilePond(selector) {
+                const inputElement = document.querySelector(selector);
+                if (inputElement) {
+                    FilePond.create(inputElement, {
+                        allowMultiple: true,
+                        imagePreviewHeight: 60,
+                        imageCropAspectRatio: '1:1',
+                        imageResizeTargetWidth: 100,
+                        imageResizeTargetHeight: 100
+                    });
+                }
+            }
+            initializeFilePond('#fileInput1');
+            initializeFilePond('#fileInput2');
+
+            function initializeCKEditor(selector) {
+                CKEDITOR.replace(selector, {
+                    height: 150,
+                    toolbar: [
+                        { name: 'basicstyles', items: ['Bold', 'Italic'] },
+                        { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                        { name: 'styles', items: ['Format'] },
+                    ],
+                });
+            }
+
+            initializeCKEditor('service_overview');
+            initializeCKEditor('service_description');
         });
 
         function getData(){
-            getPaginatedListData("{{ route('admin.location.filtered') }}", "#ajax-data-load", filterData);
+            getPaginatedListData("{{ route('admin.service.filtered') }}", "#ajax-data-load", filterData);
         }
 
         function getPaginatedData(button) {
@@ -109,7 +148,7 @@
         }
 
         function editItem(id){
-            let url = "{{route('admin.location.edit', ':id')}}";
+            let url = "{{route('admin.service.edit', ':id')}}";
             url = url.replace(':id', id);
             ajaxGet(url, {}, function (response) {
                 if (response.status == 200) {

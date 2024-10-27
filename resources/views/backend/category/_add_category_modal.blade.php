@@ -1,5 +1,5 @@
 
-<div class="modal fade hivance-modal" id="addPartnerModal" tabindex="-1" aria-labelledby="faq-addlabel" aria-hidden="true">
+<div class="modal fade kbitech-modal" id="addPartnerModal" tabindex="-1" aria-labelledby="faq-addlabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
             <form action="{{ route('admin.service-category.store') }}" id="partnerStoreForm" method="POST" enctype="multipart/form-data">

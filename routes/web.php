@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -59,6 +60,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::get('/{id}/delete', [LocationController::class, 'delete'])->name('admin.location.delete');
         });
 
+        Route::group(['prefix' => 'vendors'], function () {
+            Route::get('/', [VendorController::class, 'index'])->name('admin.vendor.index');
+            Route::post('/filtered', [VendorController::class, 'indexFiltered'])->name('admin.vendor.filtered');
+            Route::get('/{id}/view', [VendorController::class, 'viewVendor'])->name('admin.vendor.view');
+            Route::get('/{id}/delete', [VendorController::class, 'delete'])->name('admin.vendor.delete');
+        });
+
         Route::group(['prefix' => 'service-category'], function () {
             Route::get('/', [ServiceCategoryController::class, 'index'])->name('admin.service-category.index');
             Route::post('/filtered', [ServiceCategoryController::class, 'indexFiltered'])->name('admin.service-category.filtered');
@@ -69,11 +77,14 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::get('/{id}/delete', [ServiceCategoryController::class, 'delete'])->name('admin.service-category.delete');
         });
 
-        Route::group(['prefix' => 'vendors'], function () {
-            Route::get('/', [VendorController::class, 'index'])->name('admin.vendor.index');
-            Route::post('/filtered', [VendorController::class, 'indexFiltered'])->name('admin.vendor.filtered');
-            Route::get('/{id}/view', [VendorController::class, 'viewVendor'])->name('admin.vendor.view');
-            Route::get('/{id}/delete', [VendorController::class, 'delete'])->name('admin.vendor.delete');
+        Route::group(['prefix' => 'service'], function () {
+            Route::get('/', [ServiceController::class, 'index'])->name('admin.service.index');
+            Route::post('/filtered', [ServiceController::class, 'indexFiltered'])->name('admin.service.filtered');
+            Route::get('/create', [ServiceController::class, 'create'])->name('admin.service.create');
+            Route::post('/create', [ServiceController::class, 'store'])->name('admin.service.store');
+            Route::get('/{id}/edit', [ServiceController::class, 'edit'])->name('admin.service.edit');
+            Route::post('/{id}/update', [ServiceController::class, 'update'])->name('admin.service.update');
+            Route::get('/{id}/delete', [ServiceController::class, 'delete'])->name('admin.service.delete');
         });
     });
 });

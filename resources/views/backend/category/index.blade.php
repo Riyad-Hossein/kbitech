@@ -9,7 +9,7 @@
                 <div class="mcpb-wrap">
                     <div class="d-sm-flex text-center justify-content-between align-items-center ">
                         <div class="search-box-wrapper src-form position-relative">
-                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search category">
+                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search Service">
                             <button type="submit" onclick="getData()" class="src-btn position-absolute top-50 end-0 translate-middle-y bg-transparent p-0 border-0">
                                 <i data-feather="search"></i>
                             </button>
@@ -94,7 +94,7 @@
                 }, 'show_input_error');
             });
 
-            $('.hivance-modal').on('shown.bs.modal', function () {
+            $('.kbitech-modal').on('shown.bs.modal', function () {
                 initializeSelect();
             });
 

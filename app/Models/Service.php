@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceCategory extends Model
+class Service extends Model
 {
     use HasFactory;
 
-    protected $table = 'service_categories';
+    protected $table = 'services';
     public $timestamps = false;
 
     const STATUS_INACTIVE = 0;
@@ -29,8 +29,11 @@ class ServiceCategory extends Model
 
     protected $fillable = [
         'business_type_id',
+        'service_category_id',
         'name',
         'slug',
+        'short_description',
+        'long_description',
         'image',
         'status',
         'created_by',
@@ -41,8 +44,4 @@ class ServiceCategory extends Model
         'deleted_at',
         'deleted_by'
     ];
-
-    public function business_type(){
-        return $this->belongsTo(BusinessType::class);
-    }
 }

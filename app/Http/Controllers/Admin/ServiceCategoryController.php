@@ -8,6 +8,7 @@ use App\Models\BusinessType;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ServiceCategoryController extends BackendController
 {
@@ -69,6 +70,7 @@ class ServiceCategoryController extends BackendController
             $category = new ServiceCategory();
             $category->business_type_id = $request->business_type;
             $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
             $category->created_by = Auth::user()->id;
             $category->created_at = now();
             $category->updated_by = Auth::user()->id;
@@ -134,6 +136,7 @@ class ServiceCategoryController extends BackendController
 
             $category->business_type_id = $request->business_type;
             $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
             $category->updated_by = Auth::user()->id;
             $category->updated_at = now();
             $category->save();

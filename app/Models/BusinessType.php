@@ -29,6 +29,7 @@ class BusinessType extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'image',
         'status',
         'created_by',

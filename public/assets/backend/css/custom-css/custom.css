@@ -640,3 +640,34 @@
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
     background-color: #FF5F7A !important;
 }
+
+.filepond--root {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filepond--root .filepond--drop-label{
+    border: 2px dashed #b1b5c3;
+    border-radius: 5px;
+}
+
+.filepond--list.filepond--list{
+    position: static;
+    margin-top: 5px;
+}
+
+.filepond--item {
+    margin: 5px; 
+    width: 100px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filepond--root .filepond--credits{
+    display: none !important;
+}
+.cke_notifications_area{
+    display: none !important;
+}

@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_categories', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('business_type_id');
+            $table->unsignedBigInteger('service_category_id');
             $table->string('name');
             $table->string('slug');
+            $table->text('short_description')->nullable();
+            $table->longText('long_description')->nullable();
             $table->string('image')->nullable();
             \App\Helpers\MigrationHelper::getCommonColumns($table);
         });
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_categories');
+        Schema::dropIfExists('services');
     }
 };

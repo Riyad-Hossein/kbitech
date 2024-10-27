@@ -22,7 +22,7 @@
             
             @if(Auth::user()->user_type == \App\Models\User::TYPE_ADMIN)
                 <li class="menu-title small text-uppercase">
-                    <span class="menu-title-text">Service</span>
+                    <span class="menu-title-text">Services</span>
                 </li>
                 <li class="menu-item open">
                     <a href="{{ route('admin.service-category.index') }}" class="menu-link {{ ($activeMenu == 'service-category')?'active':'' }}">
@@ -30,6 +30,15 @@
                         <span class="title">Category</span>
                     </a>
                 </li>
+
+                <li class="menu-item open">
+                    <a href="{{ route('admin.service.index') }}" class="menu-link {{ ($activeMenu == 'service')?'active':'' }}">
+                        <i data-feather="file-plus" class="menu-icon tf-icons"></i>
+                        <span class="title">Service</span>
+                    </a>
+                </li>
+
+
                 <li class="menu-item open">
                     <a href="{{ route('admin.location.index') }}" class="menu-link {{ ($activeMenu == 'location')?'active':'' }}">
                         <i data-feather="map-pin" class="menu-icon tf-icons"></i>
