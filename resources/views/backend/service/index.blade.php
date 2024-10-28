@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="mcbb-wrap">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addPartnerModal" class="btn btn-primary text-white fw-semibold py-2 px-3 w-sm-100 mt-3 mt-sm-0">
+                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addServiceModal" class="btn btn-primary text-white fw-semibold py-2 px-3 w-sm-100 mt-3 mt-sm-0">
                         <span class="py-1 d-block"><i class="fa-duotone fa-plus me-1"></i>Add Category </span>
                     </a>
                 </div>
@@ -68,16 +68,17 @@
                 filterData.keyword_filtered = $(this).val();
             });
 
-            $("#partnerStoreForm").on('submit', function (e) {
+            $("#serviceStoreForm").on('submit', function (e) {
                 var self = this;
                 e.preventDefault();
                 var formData = new FormData($(self)[0]);
+                console.log(formData);
                 $(".ie-span").text("").hide();
                 var url = $(self).attr('action');
 
                 formPost(url, formData, function (res) {
                     if(res.status == 200){
-                        $('#addPartnerModal').modal('hide');
+                        $('#addServiceModal').modal('hide');
                         $(self)[0].reset();
                         showSuccessAlert('Success',res.message)
                         getData();
@@ -109,11 +110,11 @@
             });
 
             FilePond.registerPlugin(FilePondPluginImagePreview);
-            function initializeFilePond(selector) {
+            function initializeFilePond(selector, multiple) {
                 const inputElement = document.querySelector(selector);
                 if (inputElement) {
                     FilePond.create(inputElement, {
-                        allowMultiple: true,
+                        allowMultiple: multiple,
                         imagePreviewHeight: 60,
                         imageCropAspectRatio: '1:1',
                         imageResizeTargetWidth: 100,
@@ -121,8 +122,8 @@
                     });
                 }
             }
-            initializeFilePond('#fileInput1');
-            initializeFilePond('#fileInput2');
+            initializeFilePond('#fileInput1', multiple=false);
+            initializeFilePond('#fileInput2', multiple=true);
 
             function initializeCKEditor(selector) {
                 CKEDITOR.replace(selector, {
@@ -145,6 +146,24 @@
 
         function getPaginatedData(button) {
             getPaginatedListData($(button).attr('data-href'), "#ajax-data-load", filterData);
+        }
+
+        function getServiceCategory(select) {
+            var business_type_id = $(select).val();
+            console.log(business_type_id);
+            let url = "{{ route('ajax.get-category-by-business-type') }}";
+            if(business_type_id.length > 0){
+                ajaxGet(url, {business_type_id:business_type_id}, function (response) {
+                    if (response.status == 200) {
+                        $("#category_id").html(response.view);
+                    } else {
+                        $("#category_id").html('');
+                        toastr.error(response.message);
+                    }
+                });
+            }else{
+                $("#category_id").html('');
+            }
         }
 
         function editItem(id){

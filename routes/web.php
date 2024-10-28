@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -67,6 +70,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::get('/{id}/delete', [VendorController::class, 'delete'])->name('admin.vendor.delete');
         });
 
+        Route::group(['prefix' => 'ajax'], function () {
+            Route::get('get-category-by-business-type', [AjaxController::class, 'getCategoryByBusinessType'])->name('ajax.get-category-by-business-type');
+        });
+
         Route::group(['prefix' => 'service-category'], function () {
             Route::get('/', [ServiceCategoryController::class, 'index'])->name('admin.service-category.index');
             Route::post('/filtered', [ServiceCategoryController::class, 'indexFiltered'])->name('admin.service-category.filtered');
@@ -85,6 +92,26 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::get('/{id}/edit', [ServiceController::class, 'edit'])->name('admin.service.edit');
             Route::post('/{id}/update', [ServiceController::class, 'update'])->name('admin.service.update');
             Route::get('/{id}/delete', [ServiceController::class, 'delete'])->name('admin.service.delete');
+        });
+
+        Route::group(['prefix' => 'project'], function () {
+            Route::get('/', [ProjectController::class, 'index'])->name('admin.project.index');
+            Route::post('/filtered', [ProjectController::class, 'indexFiltered'])->name('admin.project.filtered');
+            Route::get('/create', [ProjectController::class, 'create'])->name('admin.project.create');
+            Route::post('/create', [ProjectController::class, 'store'])->name('admin.project.store');
+            Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('admin.project.edit');
+            Route::post('/{id}/update', [ProjectController::class, 'update'])->name('admin.project.update');
+            Route::get('/{id}/delete', [ProjectController::class, 'delete'])->name('admin.project.delete');
+        });
+
+        Route::group(['prefix' => 'team'], function () {
+            Route::get('/', [TeamController::class, 'index'])->name('admin.team.index');
+            Route::post('/filtered', [TeamController::class, 'indexFiltered'])->name('admin.team.filtered');
+            Route::get('/create', [TeamController::class, 'create'])->name('admin.team.create');
+            Route::post('/create', [TeamController::class, 'store'])->name('admin.team.store');
+            Route::get('/{id}/edit', [TeamController::class, 'edit'])->name('admin.team.edit');
+            Route::post('/{id}/update', [TeamController::class, 'update'])->name('admin.team.update');
+            Route::get('/{id}/delete', [TeamController::class, 'delete'])->name('admin.team.delete');
         });
     });
 });

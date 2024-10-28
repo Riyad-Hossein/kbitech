@@ -33,8 +33,28 @@
 
                 <li class="menu-item open">
                     <a href="{{ route('admin.service.index') }}" class="menu-link {{ ($activeMenu == 'service')?'active':'' }}">
-                        <i data-feather="file-plus" class="menu-icon tf-icons"></i>
+                        <i data-feather="anchor" class="menu-icon tf-icons"></i>
                         <span class="title">Service</span>
+                    </a>
+                </li>
+
+                <li class="menu-title small text-uppercase">
+                    <span class="menu-title-text">Project Management</span>
+                </li>
+                <li class="menu-item open">
+                    <a href="{{ route('admin.project.index') }}" class="menu-link {{ ($activeMenu == 'project')?'active':'' }}">
+                        <i data-feather="image" class="menu-icon tf-icons"></i>
+                        <span class="title">Project</span>
+                    </a>
+                </li>
+                
+                <li class="menu-title small text-uppercase">
+                    <span class="menu-title-text">HR</span>
+                </li>
+                <li class="menu-item open">
+                    <a href="{{ route('admin.team.index') }}" class="menu-link {{ ($activeMenu == 'team')?'active':'' }}">
+                        <i data-feather="users" class="menu-icon tf-icons"></i>
+                        <span class="title">Team Member</span>
                     </a>
                 </li>
 
