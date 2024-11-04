@@ -45,4 +45,6 @@ class ServiceCategory extends Model
     public function business_type(){
         return $this->belongsTo(BusinessType::class);
     }
+
+    
 }

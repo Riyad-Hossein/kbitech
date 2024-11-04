@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseControllers\BackendController;
 use App\Http\Controllers\Controller;
 use App\Models\BusinessType;
 use App\Models\Service;
+use App\Models\ServiceImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -35,7 +36,7 @@ class ServiceController extends BackendController
     public function indexFiltered(Request $request)
     {
         $keyword_filtered = $request->keyword_filtered;
-        $data['categories'] = Service::where('deleted', Service::DELETED_NO)
+        $data['services'] = Service::where('deleted', Service::DELETED_NO)
             ->where('status', Service::STATUS_ACTIVE)
             ->where(function ($q) use ($keyword_filtered){
                 if ($keyword_filtered !=''){
@@ -103,6 +104,21 @@ class ServiceController extends BackendController
             $service->updated_at = now();
             $service->save();
 
+            if ($request->has('service_image')) {
+                $uploadPath = 'service';
+                foreach ($request->file('service_image') as $serviceImage) {
+                    $result = ImageUploadHelper::store($serviceImage, $uploadPath, null, 'webp');
+                    $imagePath = $result['path'];
+
+                    $images = new ServiceImage();
+                    $images->service_id = $service->id;
+                    $images->image = $imagePath;
+                    $images->created_by = Auth::user()->id;
+                    $images->updated_at = now();
+                    $images->save();
+                }
+            }
+
         }catch (\Exception $e) {
             return $this->returnAjaxError([],$e->getMessage());
         }
@@ -120,10 +136,10 @@ class ServiceController extends BackendController
                 ->first();
                 
             if (!$data['item']) {
-                throw new \Exception('Service category not found');
+                throw new \Exception('Service not found');
             }
 
-            $view = $this->view('backend.category._edit_data')
+            $view = $this->view('backend.service._edit_data')
                 ->with($data)
                 ->render();
 
@@ -180,7 +196,7 @@ class ServiceController extends BackendController
                 ->where('deleted', Service::DELETED_NO)
                 ->first();
             if (!$service) {
-                throw new \Exception('Service category not found');
+                throw new \Exception('Service not found');
             }
             $service->deleted = Service::DELETED_YES;
             $service->deleted_by = Auth::user()->id;
@@ -190,6 +206,6 @@ class ServiceController extends BackendController
         }catch (\Exception $e) {
             return $this->returnAjaxError([],$e->getMessage());
         }
-        return $this->returnAjaxSuccess([], 'Service category deleted successfully');
+        return $this->returnAjaxSuccess([], 'Service deleted successfully');
     }
 }

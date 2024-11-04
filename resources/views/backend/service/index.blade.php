@@ -9,7 +9,7 @@
                 <div class="mcpb-wrap">
                     <div class="d-sm-flex text-center justify-content-between align-items-center ">
                         <div class="search-box-wrapper src-form position-relative">
-                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search category">
+                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search Service">
                             <button type="submit" onclick="getData()" class="src-btn position-absolute top-50 end-0 translate-middle-y bg-transparent p-0 border-0">
                                 <i data-feather="search"></i>
                             </button>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="mcbb-wrap">
                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addServiceModal" class="btn btn-primary text-white fw-semibold py-2 px-3 w-sm-100 mt-3 mt-sm-0">
-                        <span class="py-1 d-block"><i class="fa-duotone fa-plus me-1"></i>Add Category </span>
+                        <span class="py-1 d-block"><i class="fa-duotone fa-plus me-1"></i>Add Service </span>
                     </a>
                 </div>
             </div>
@@ -41,14 +41,10 @@
 
 @section('css_plugins')
     <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/select2.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
 @endsection
 
 @section('js_plugins')
     <script src="{{ asset('assets/backend') }}/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/filepond/dist/filepond.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <!-- Include CKEditor from CDN -->
     <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
 
@@ -71,6 +67,9 @@
             $("#serviceStoreForm").on('submit', function (e) {
                 var self = this;
                 e.preventDefault();
+                for (var instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
                 var formData = new FormData($(self)[0]);
                 console.log(formData);
                 $(".ie-span").text("").hide();
@@ -90,6 +89,10 @@
 
             $(document).on("submit", "#partnerUpdateForm", function(e) {
                 e.preventDefault();
+                for (var instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
+                
                 var formData = new FormData($(this)[0]);
                 $(".ie-span").text("").hide();
                 var url = $(this).attr('action');
@@ -108,36 +111,6 @@
             $('.kbitech-modal').on('shown.bs.modal', function () {
                 initializeSelect();
             });
-
-            FilePond.registerPlugin(FilePondPluginImagePreview);
-            function initializeFilePond(selector, multiple) {
-                const inputElement = document.querySelector(selector);
-                if (inputElement) {
-                    FilePond.create(inputElement, {
-                        allowMultiple: multiple,
-                        imagePreviewHeight: 60,
-                        imageCropAspectRatio: '1:1',
-                        imageResizeTargetWidth: 100,
-                        imageResizeTargetHeight: 100
-                    });
-                }
-            }
-            initializeFilePond('#fileInput1', multiple=false);
-            initializeFilePond('#fileInput2', multiple=true);
-
-            function initializeCKEditor(selector) {
-                CKEDITOR.replace(selector, {
-                    height: 150,
-                    toolbar: [
-                        { name: 'basicstyles', items: ['Bold', 'Italic'] },
-                        { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
-                        { name: 'styles', items: ['Format'] },
-                    ],
-                });
-            }
-
-            initializeCKEditor('service_overview');
-            initializeCKEditor('service_description');
         });
 
         function getData(){
@@ -150,7 +123,6 @@
 
         function getServiceCategory(select) {
             var business_type_id = $(select).val();
-            console.log(business_type_id);
             let url = "{{ route('ajax.get-category-by-business-type') }}";
             if(business_type_id.length > 0){
                 ajaxGet(url, {business_type_id:business_type_id}, function (response) {
@@ -173,11 +145,28 @@
                 if (response.status == 200) {
                     $("#edit_partner_modal_body").html(response.view);
                     $("#editPartnerModal").modal('show');
+                    
+                    initializeCKEditor('service_overview2');
+                    initializeCKEditor('service_description2');
                 } else {
                     toastr.error(response.message);
                 }
             }, 'default');
         }
+
+        function initializeCKEditor(selector) {
+            CKEDITOR.replace(selector, {
+                height: 150,
+                toolbar: [
+                    { name: 'basicstyles', items: ['Bold', 'Italic'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                    { name: 'styles', items: ['Format'] },
+                ],
+            });
+        }
+
+        initializeCKEditor('service_overview');
+        initializeCKEditor('service_description');
 
         function initializeSelect() {
             $('.select2').select2({

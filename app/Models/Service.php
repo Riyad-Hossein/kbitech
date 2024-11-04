@@ -44,4 +44,12 @@ class Service extends Model
         'deleted_at',
         'deleted_by'
     ];
+
+    public function business_type(){
+        return $this->belongsTo(BusinessType::class);
+    }
+
+    public function service_category(){
+        return $this->belongsTo(ServiceCategory::class);
+    }
 }

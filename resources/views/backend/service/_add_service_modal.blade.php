@@ -5,7 +5,7 @@
             <form action="{{ route('admin.service.store') }}" id="serviceStoreForm" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="faq-addlabel">Add Service Category</h1>
+                    <h1 class="modal-title fs-5" id="faq-addlabel">Add Service</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body custom-modal-body">
@@ -50,14 +50,14 @@
                         <div class="col-lg-6 mb-3">
                             <div class="form-group">
                                 <label class="label">Thumbnail Image</label>
-                                <input type="file" name="image" id="fileInput1" class="filepond" accept="image/*" />
+                                <input type="file" name="image" class="form-control text-dark" accept="image/*" />
                             </div>
                         </div>
 
                         <div class="col-lg-6 mb-3">    
                             <div class="form-group">
                                 <label class="label">Service Images</label>
-                                <input type="file" name="service_image[]" id="fileInput2" class="filepond" multiple accept="image/*" />
+                                <input type="file" name="service_image[]" class="form-control text-dark" multiple accept="image/*" />
                             </div>
                         </div>
                         <div class="col-lg-6 mb-3">
