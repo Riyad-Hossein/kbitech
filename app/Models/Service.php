@@ -52,4 +52,10 @@ class Service extends Model
     public function service_category(){
         return $this->belongsTo(ServiceCategory::class);
     }
+
+    public function service_images(){
+        return $this->hasMany(ServiceImage::class)
+            ->where('deleted', ServiceImage::DELETED_NO)
+            ->where('status', ServiceImage::STATUS_ACTIVE);
+    }
 }

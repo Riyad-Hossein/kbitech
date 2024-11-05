@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseControllers\BackendController;
 use App\Http\Controllers\Controller;
 use App\Models\BusinessType;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\ServiceImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -139,6 +140,11 @@ class ServiceController extends BackendController
                 throw new \Exception('Service not found');
             }
 
+            $data['service_categories'] = ServiceCategory::where('business_type_id', $data['item']->business_type_id)
+                ->where('deleted', ServiceCategory::DELETED_NO)
+                ->where('status', ServiceCategory::STATUS_ACTIVE)
+                ->get();
+
             $view = $this->view('backend.service._edit_data')
                 ->with($data)
                 ->render();
@@ -188,6 +194,25 @@ class ServiceController extends BackendController
         }
         return $this->returnAjaxSuccess([], 'Service category updated successfully');
     }
+
+    public function removeImage(Request $request)
+    {
+        try {
+            $image = ServiceImage::findOrFail($request->image_id);
+            $imagePath = public_path($image->image);
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath); 
+            }
+
+            $image->delete();
+
+            return $this->returnAjaxSuccess([], 'Service image removed successfully');
+        } catch (\Exception $e) {
+            return $this->returnAjaxError([],$e->getMessage());
+        }
+    }
+
 
     public function delete($id)
     {

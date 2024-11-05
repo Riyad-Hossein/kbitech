@@ -128,13 +128,16 @@
                 ajaxGet(url, {business_type_id:business_type_id}, function (response) {
                     if (response.status == 200) {
                         $("#category_id").html(response.view);
+                        $("#category_id2").html(response.view);
                     } else {
                         $("#category_id").html('');
+                        $("#category_id2").html('');
                         toastr.error(response.message);
                     }
                 });
             }else{
                 $("#category_id").html('');
+                $("#category_id2").html('');
             }
         }
 
