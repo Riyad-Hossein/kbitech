@@ -9,7 +9,7 @@
                 <div class="mcpb-wrap">
                     <div class="d-sm-flex text-center justify-content-between align-items-center ">
                         <div class="search-box-wrapper src-form position-relative">
-                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search partner">
+                            <input type="text" class="form-control" id="keyword_filtered" placeholder="Search Team Member">
                             <button type="submit" onclick="getData()" class="src-btn position-absolute top-50 end-0 translate-middle-y bg-transparent p-0 border-0">
                                 <i data-feather="search"></i>
                             </button>
@@ -18,8 +18,8 @@
                     </div>
                 </div>
                 <div class="mcbb-wrap">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addPartnerModal" class="btn btn-primary text-white fw-semibold py-2 px-3 w-sm-100 mt-3 mt-sm-0">
-                        <span class="py-1 d-block"><i class="fa-duotone fa-plus me-1"></i>Create Partner </span>
+                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addServiceModal" class="btn btn-primary text-white fw-semibold py-2 px-3 w-sm-100 mt-3 mt-sm-0">
+                        <span class="py-1 d-block"><i class="fa-duotone fa-plus me-1"></i>Add Team Member </span>
                     </a>
                 </div>
             </div>
@@ -32,8 +32,19 @@
 @endsection
 
 @section('modals')
-    @include('backend.partner._add_partner_modal')
-    @include('backend.partner._edit_partner_modal')
+    @include('backend.team._add_team_modal')
+    @include('backend.team._edit_team_modal')
+@endsection
+
+@section('css')
+@endsection
+
+@section('css_plugins')
+
+@endsection
+
+@section('js_plugins')
+
 @endsection
 
 @section('js')
@@ -49,7 +60,7 @@
                 filterData.keyword_filtered = $(this).val();
             });
 
-            $("#partnerStoreForm").on('submit', function (e) {
+            $("#serviceStoreForm").on('submit', function (e) {
                 var self = this;
                 e.preventDefault();
                 var formData = new FormData($(self)[0]);
@@ -58,7 +69,7 @@
 
                 formPost(url, formData, function (res) {
                     if(res.status == 200){
-                        $('#addPartnerModal').modal('hide');
+                        $('#addServiceModal').modal('hide');
                         $(self)[0].reset();
                         showSuccessAlert('Success',res.message)
                         getData();
@@ -70,6 +81,7 @@
 
             $(document).on("submit", "#partnerUpdateForm", function(e) {
                 e.preventDefault();
+                
                 var formData = new FormData($(this)[0]);
                 $(".ie-span").text("").hide();
                 var url = $(this).attr('action');
@@ -84,11 +96,10 @@
                     }
                 }, 'show_input_error');
             });
-
         });
 
         function getData(){
-            getPaginatedListData("{{ route('admin.partner.filtered') }}", "#ajax-data-load", filterData);
+            getPaginatedListData("{{ route('admin.team.filtered') }}", "#ajax-data-load", filterData);
         }
 
         function getPaginatedData(button) {
@@ -96,7 +107,7 @@
         }
 
         function editItem(id){
-            let url = "{{route('admin.partner.edit', ':id')}}";
+            let url = "{{route('admin.team.edit', ':id')}}";
             url = url.replace(':id', id);
             ajaxGet(url, {}, function (response) {
                 if (response.status == 200) {

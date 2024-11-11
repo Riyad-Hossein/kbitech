@@ -58,27 +58,12 @@
                     </a>
                 </li>
 
-
-                <li class="menu-item open">
-                    <a href="{{ route('admin.location.index') }}" class="menu-link {{ ($activeMenu == 'location')?'active':'' }}">
-                        <i data-feather="map-pin" class="menu-icon tf-icons"></i>
-                        <span class="title">All Locations</span>
-                    </a>
-                </li>
-                
-            
-                <li class="menu-item open">
-                    <a href="{{ route('admin.partner.index') }}" class="menu-link {{ ($activeMenu == 'partners')?'active':'' }}">
-                        <i data-feather="users" class="menu-icon tf-icons"></i>
-                        <span class="title">All Partners</span>
-                    </a>
-                </li>
-                <li class="menu-item open">
+                <!-- <li class="menu-item open">
                     <a href="{{ route('admin.vendor.index') }}" class="menu-link {{ ($activeMenu == 'vendors')?'active':'' }}" >
                         <i data-feather="framer" class="menu-icon tf-icons"></i>
                         <span class="title">Vendor On-Boarding</span>
                     </a>
-                </li>
+                </li> -->
             @endif
 
         </ul>

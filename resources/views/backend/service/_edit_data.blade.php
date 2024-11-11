@@ -72,10 +72,11 @@
                         <label>Existing Images:</label>
                         <div class="row">
                             @foreach($item->service_images as $image)
-                                <div class="col-md-3 position-relative">
+                                <div class="col-md-3 position-relative" id="image-{{ $image->id }}">
+                                    <input type="hidden" name="service_image_id[]" value="{{ $image->id }}">
                                     <img src="{{ asset($image->image) }}" alt="Service Image" class="img-thumbnail mb-2" width="150">
-                                    <button type="button" class="btn btn-info btn-sm position-absolute top-0 end-0" onclick="removeImage({{ $image->id }})" style="border-radius: 50%;">
-                                        <i class="fa fa-trash"></i>
+                                    <button data-id="{{ $image->id }}" type="button" class="btn btn-info btn-sm position-absolute top-0 end-0 remove-service-image" style="border-radius: 50%;">
+                                        <i class="fa fa-trash text-white"></i>
                                     </button>
                                 </div>
                             @endforeach

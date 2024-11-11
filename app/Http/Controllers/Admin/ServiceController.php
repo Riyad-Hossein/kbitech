@@ -182,37 +182,62 @@ class ServiceController extends BackendController
                 throw new \Exception("Service category already exists");
             }
 
+            $imagePath = $service->image;
+            if ($request->has('image')) {
+                $image = $request->input('image');
+                $isBase64 = false;
+                if (preg_match('/^data:image\/(\w+);base64,/', $image)) {
+                    $isBase64 = true;
+                }
+                $uploadPath = 'service';
+                if ($isBase64) {
+                    $result = ImageUploadHelper::storeBase64Image($image, $uploadPath, null, 'webp');
+                } else {
+                    $file = $request->file('image');
+                    $result = ImageUploadHelper::store($file, $uploadPath, null, 'webp');
+                }
+
+                $imagePath = $result['path'];
+            }
+
             $service->business_type_id = $request->business_type;
+            $service->service_category_id = $request->service_category;
             $service->name = $request->name;
             $service->slug = Str::slug($request->name);
+            $service->short_description = $request->short_description;
+            $service->long_description = $request->long_description;
+            $service->image = $imagePath;
+            $service->created_by = Auth::user()->id;
+            $service->created_at = now();
             $service->updated_by = Auth::user()->id;
             $service->updated_at = now();
             $service->save();
+
+            $service_image_ids = $request->service_image_id ?? [];
+            ServiceImage::where('service_id', $service->id)
+                ->whereNotIn('id', $service_image_ids)
+                ->delete();
+
+            if ($request->has('service_image')) {
+                $uploadPath = 'service';
+                foreach ($request->file('service_image') as $serviceImage) {
+                    $result = ImageUploadHelper::store($serviceImage, $uploadPath, null, 'webp');
+                    $imagePath = $result['path'];
+
+                    $images = new ServiceImage();
+                    $images->service_id = $service->id;
+                    $images->image = $imagePath;
+                    $images->created_by = Auth::user()->id;
+                    $images->updated_at = now();
+                    $images->save();
+                }
+            }
             
         }catch (\Exception $e) {
             return $this->returnAjaxError([],$e->getMessage());
         }
         return $this->returnAjaxSuccess([], 'Service category updated successfully');
     }
-
-    public function removeImage(Request $request)
-    {
-        try {
-            $image = ServiceImage::findOrFail($request->image_id);
-            $imagePath = public_path($image->image);
-
-            if (file_exists($imagePath)) {
-                unlink($imagePath); 
-            }
-
-            $image->delete();
-
-            return $this->returnAjaxSuccess([], 'Service image removed successfully');
-        } catch (\Exception $e) {
-            return $this->returnAjaxError([],$e->getMessage());
-        }
-    }
-
 
     public function delete($id)
     {

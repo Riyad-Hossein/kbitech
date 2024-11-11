@@ -108,6 +108,11 @@
                 }, 'show_input_error');
             });
 
+            $(document).on("click", ".remove-service-image", function() {
+                let imageId = $(this).data('id');
+                $('#image-' + imageId).remove();
+            });
+
             $('.kbitech-modal').on('shown.bs.modal', function () {
                 initializeSelect();
             });

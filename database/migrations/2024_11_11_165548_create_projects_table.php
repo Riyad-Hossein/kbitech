@@ -11,9 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('partners', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('business_type_id')->nullable();
+            $table->unsignedBigInteger('project_category_id')->nullable();
             $table->string('name');
+            $table->string('slug');
+            $table->text('client')->nullable();
+            $table->date('project_date');
+            $table->text('team_members')->nullable();
+            $table->text('location')->nullable();
+            $table->longText('details')->nullable();
             $table->string('image')->nullable();
             \App\Helpers\MigrationHelper::getCommonColumns($table);
         });
@@ -24,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('partners');
+        Schema::dropIfExists('projects');
     }
 };

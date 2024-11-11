@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Partner extends Model
+class TeamMember extends Model
 {
     use HasFactory;
 
-    protected $table = 'partners';
+    protected $table = 'team_members';
     public $timestamps = false;
 
     const STATUS_INACTIVE = 0;
@@ -29,6 +29,12 @@ class Partner extends Model
 
     protected $fillable = [
         'name',
+        'slug',
+        'designation',
+        'email',
+        'linkedin_url',
+        'facebook_url',
+        'twitter_url',
         'image',
         'status',
         'created_by',
@@ -45,6 +51,6 @@ class Partner extends Model
         if ($this->image != null && $this->image != '') {
             return asset($this->image);
         }
-        return asset('assets/images/placeholder.jpg');
+        return asset('assets/images/user.png');
     }
 }

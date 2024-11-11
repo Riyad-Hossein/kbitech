@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Location extends Model
+class Project extends Model
 {
     use HasFactory;
 
-    protected $table = 'locations';
+    protected $table = 'projects';
     public $timestamps = false;
 
     const STATUS_INACTIVE = 0;
@@ -28,10 +28,16 @@ class Location extends Model
 
 
     protected $fillable = [
-        'country_id',
-        'state_id',
-        'city_id',
-        'city_name',
+        'business_type_id',
+        'project_category_id',
+        'name',
+        'slug',
+        'client',
+        'project_date',
+        'team_members',
+        'location',
+        'details',
+        'image',
         'status',
         'created_by',
         'created_at',
@@ -42,7 +48,11 @@ class Location extends Model
         'deleted_by'
     ];
 
-    public function state(){
-        return $this->belongsTo(State::class);
+    public function business_type(){
+        return $this->belongsTo(BusinessType::class);
+    }
+
+    public function project_category(){
+        return $this->belongsTo(ServiceCategory::class);
     }
 }
