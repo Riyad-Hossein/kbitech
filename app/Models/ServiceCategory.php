@@ -43,7 +43,9 @@ class ServiceCategory extends Model
     ];
 
     public function business_type(){
-        return $this->belongsTo(BusinessType::class);
+        return $this->belongsTo(BusinessType::class)
+            ->where('deleted', BusinessType::DELETED_NO)
+            ->where('status', BusinessType::STATUS_ACTIVE);
     }
 
     

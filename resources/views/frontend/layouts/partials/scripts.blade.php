@@ -1,110 +1,95 @@
-<!-- All JS files -->
-  <!-- <script src="assets/js/jquery-3.6.0.min.js"></script> -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/bootstrap.bundle.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/jquery.magnific-popup.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/swiper-bundle.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/counter.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/progressbar.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/gsap.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/ScrollSmoother.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/ScrollToPlugin.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/ScrollTrigger.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/SplitText.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/jquery.meanmenu.min.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/backToTop.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/main.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/error-handling.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/offcanvas.js"></script>
-  <script src="{{ asset('assets/frontend') }}/js/ajax-request.js"></script>
-
-  @yield('frontend_js_plugins')
-
-  <script>
-
-    // client slider 
-    if ('.client-slider-active') {
-      var client_slider_active = new Swiper(".client-slider-active", {
-        slidesPerView: 'auto',
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Popper.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{{ asset('assets/frontend') }}/js/theme-change.js"></script>
+  <script src="{{ asset('assets/frontend') }}/js/owl.carousel.js"></script>
+  <script src="{{ asset('assets/frontend') }}/js/aos.js"></script>
+  <script src="{{ asset('assets/frontend') }}/js/lightbox.min.js"></script> @yield('frontend_js_plugins') <script>
+    $(document).ready(function() {
+      $("#owl-demo1").owlCarousel({
         loop: true,
-        autoplay: true,
-        spaceBetween: 110,
-        speed: 3000,
-        autoplay: {
-          delay: 1,
-        },
+        margin: 20,
+        nav: false,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1,
+            nav: false
+          },
+          1000: {
+            items: 1,
+            nav: false,
+            loop: false
+          }
+        }
+      })
+    })
+  </script>
+  <script src="{{ asset('assets/frontend') }}/js/jquery.magnific-popup.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+        fixedContentPos: false,
+        fixedBgPos: true,
+        overflowY: 'auto',
+        closeBtnInside: true,
+        preloader: false,
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
       });
-    }
-
-    // project slider
-    if (('.project-slider').length) {
-      var project_slider = new Swiper(".project-slider", {
-        loop: false,
-        slidesPerView: 1,
-        spaceBetween: 40,
-        speed: 1800,
-        watchSlidesProgress: true,
-        navigation: {
-          prevEl: ".project-button-prev",
-          nextEl: ".project-button-next",
-        },
-        pagination: {
-          el: '.project-pagination',
-          type: 'bullets',
-          clickable: true
-        },
-        breakpoints: {
-          // when window width is >= px
-          576: {
-            slidesPerView: 1,
-          },
-          768: {
-            slidesPerView: 2,
-          },
-          992: {
-            slidesPerView: 3,
-          },
-          1201: {
-            slidesPerView: 3,
-          },
-          1367: {
-            slidesPerView: 4,
-          },
+      $('.popup-with-move-anim').magnificPopup({
+        type: 'inline',
+        fixedContentPos: false,
+        fixedBgPos: true,
+        overflowY: 'auto',
+        closeBtnInside: true,
+        preloader: false,
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-slide-bottom'
+      });
+    });
+  </script>
+  <script src="{{ asset('assets/frontend') }}/js/jquery.waypoints.min.js"></script>
+  <script src="{{ asset('assets/frontend') }}/js/jquery.countup.js"></script>
+  <script>
+    $('.counter').countUp();
+  </script>
+  <script>
+    $(function() {
+      $('.navbar-toggler').click(function() {
+        $('body').toggleClass('noscroll');
+      })
+    });
+  </script>
+  <script>
+    $(window).on("scroll", function() {
+      var scroll = $(window).scrollTop();
+      if (scroll >= 80) {
+        $("#site-header").addClass("nav-fixed");
+      } else {
+        $("#site-header").removeClass("nav-fixed");
+      }
+    });
+    $(".navbar-toggler").on("click", function() {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      $(window).on("resize", function() {
+        if ($(window).width() > 991) {
+          $("header").removeClass("active");
         }
       });
-    }
-
-
-    // testimonial slider
-    if (('.testimonial-slider').length) {
-      var testimonial_slider = new Swiper(".testimonial-slider", {
-        loop: false,
-        slidesPerView: 1,
-        spaceBetween: 60,
-        speed: 1800,
-        watchSlidesProgress: true,
-        navigation: {
-          prevEl: ".testimonial-button-prev",
-          nextEl: ".testimonial-button-next",
-        },
-      });
-    }
-
-
-    // text slider 
-    if ('.text-slider-active') {
-      var text_slider_active = new Swiper(".text-slider-active", {
-        slidesPerView: 'auto',
-        loop: true,
-        autoplay: true,
-        spaceBetween: 30,
-        speed: 10000,
-        autoplay: {
-          delay: 1,
-        },
-      });
-    }
-
+    });
   </script>
-
-@yield('frontend_js')
+  <!-- aos -->
+  <script>
+    AOS.init();
+  </script> @yield('frontend_js')

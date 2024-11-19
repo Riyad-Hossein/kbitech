@@ -48,4 +48,11 @@ class BusinessType extends Model
         }
         return asset('assets/images/placeholder.jpg');
     }
+
+    public function service_categories()
+    {
+        return $this->hasMany(ServiceCategory::class, 'business_type_id')
+            ->where('deleted', ServiceCategory::DELETED_NO)
+            ->where('status', ServiceCategory::STATUS_ACTIVE);
+    }
 }

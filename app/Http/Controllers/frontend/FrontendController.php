@@ -14,15 +14,9 @@ use Illuminate\Support\Facades\Validator;
 class FrontendController extends Controller
 {
     public function homePage(){
-        $data['partners'] = Partner::where('deleted', Partner::DELETED_NO)
-            ->where('status', Partner::STATUS_ACTIVE)
-            ->orderBy('name', 'asc')
-            ->get();
+        $data['partners'] =[];
         
-        $data['locations'] = Location::where('deleted', Location::DELETED_NO)
-            ->where('status', Location::STATUS_ACTIVE)
-            ->orderBy('city_name', 'asc')
-            ->get();
+        $data['locations'] = [];
 
         return view('frontend.pages.home')->with($data);
     }
@@ -93,6 +87,13 @@ class FrontendController extends Controller
         $vendor->save();
 
         return redirect()->route('vendor')->with('success', 'Vendor onboarded successfully.');
+    }
+
+    public function projectPage(){
+        return view('frontend.pages.project');
+    }
+    public function teamPage(){
+        return view('frontend.pages.team');
     }
 
     public function contactPage(){

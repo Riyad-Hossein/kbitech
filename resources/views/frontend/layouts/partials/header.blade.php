@@ -1,107 +1,74 @@
-<!-- Cursor Animation -->
-<div class="cursor1"></div>
-<div class="cursor2"></div>
-
-<!-- Sroll to top -->
-<div class="progress-wrap">
-  <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-    <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
-  </svg>
-</div>
-
-<!-- offcanvas start  -->
-<div class="offcanvas-3__area">
-  <div class="offcanvas-3__inner">
-    <div class="offcanvas-3__meta-wrapper">
-      <div class="">
-        <button id="close_offcanvas" class="close-button close-offcanvas" onclick="hideCanvas3()">
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <div class="">
-        <div class="offcanvas-3__meta mb-145 d-none d-md-block">
-          <ul>
-            <li><a href="tel:+2-352698102" class="unnerline"><u>+2-352 698 102</u></a></li>
-            <li><a href="mailto:contact@me.com">contact@me.com</a></li>
-            <li><a href="#">27 Division St, <br>
-                New York, NY 10002, USA</a></li>
-          </ul>
-        </div>
-        <div class="offcanvas-3__social d-none d-md-block">
-          <p class="title">Follow Me</p>
-          <div class="offcanvas-3__social-links">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-dribbble"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="offcanvas-3__menu-wrapper">
-      <nav class="nav-menu offcanvas-3__menu">
-        <ul>
-          <li><a href="{{ route('frontend.home') }}">Home</a></li>
-          <li><a href="{{ route('about') }}">About</a></li>
-          <li><a href="{{ route('service') }}">Services</a></li>
-          <li><a href="{{ route('vendor') }}">Vendor onboarding</a></li>
-          <li><a href="{{ route('contact') }}">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</div>
-<!-- offcanvas end  -->
-
-
-<!-- search modal start -->
-<div class="modal fade" id="search-template" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="search-template" aria-hidden="true">
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <form action="#" class="form-search">
-          <input type="text" placeholder="Search">
-          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- search modal end -->
-
-<!-- Header area start -->
-<header class="header-area">
-  <div class="container large">
-    <div class="header-area__inner">
-      <div class="header__logo">
-        <a href="{{ route('frontend.home') }}">
-          <img class="show-light" src="{{asset('assets/frontend')}}/imgs/logo/logo.png" alt="Site Logo">
-        
+@if (Route::currentRouteName() !== 'frontend.home')
+  <div class="header-margin"></div>
+@endif
+<header id="site-header" class="fixed-top {{ Route::currentRouteName() !== 'frontend.home' ? 'header2' : '' }}">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg stroke px-0 pt-lg-0 pb-lg-0">
+        <a class="navbar-brand" href="index.html">
+          <img src="{{ asset('assets/frontend') }}/images/logo3.png" alt="logo" title="logo" style="height:80px;" />
         </a>
-      </div>
-      <div class="header__nav pos-center">
-        <nav class="main-menu">
-          <ul>
-            <li><a href="{{ route('frontend.home') }}">Home</a></li>
-            <li><a href="{{ route('about') }}">About</a></li>
-            <li><a href="{{ route('service') }}">Services</a></li>
-            <li><a href="{{ route('vendor') }}">Vendor onboarding</a></li>
-            <li><a href="{{ route('contact') }}">Contact</a></li>
+        <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
+          data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+          aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+        <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-lg-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{route('frontend.home')}}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('frontend.about')}}">About</a>
+              </li>
+
+              <li class="nav-item dropdown has-mega-menu" style="position:static;">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    Services <i class="fa-solid fa-chevron-down"></i></a> 
+
+                <div class="dropdown-menu dropdown-right megamenu" aria-labelledby="navbarDropdownMenuLink">
+                    <!-- <div class="px-0 container"> -->
+                      <div class="row">
+                        @foreach($businessTypes as $type)
+                          <div class="col col-md-6 col-lg-6">
+                            <div class="menu-service-category">
+                                <a class="menu-category-title" href="service.html">{{$type?->name}}</a>
+                            </div>
+                            @foreach($type->service_categories as $category)
+                              <a class="dropdown-item" href="#">{{$category?->name}}</a>
+                            @endforeach
+                          </div>
+                        @endforeach
+                      </div>
+                    <!-- </div> -->
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('frontend.project')}}">Projects</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('frontend.team')}}">Team</a>
+              </li>
+              <li class="nav-item pr-5">
+                <a class="nav-link" href="{{route('frontend.contact')}}">Contact</a>
+              </li>
           </ul>
-        </nav>
-      </div>
-      <div class="header__button">
-        <a class="wc-btn wc-btn-primary btn-text-flip" href="{{route('contact')}}"><span data-text="Get started">Get
-            started</span></a>
-      </div>
-      <div class="header__navicon d-xl-none">
-        <button onclick="showCanvas3()" class="open-offcanvas">
-          <i class="fa-solid fa-bars"></i></button>
-      </div>
-    </div>
+        </div>
+        <!-- toggle switch for light and dark theme -->
+        <div class="mobile-position">
+          <nav class="navigation">
+              <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox">
+                    <div class="mode-container">
+                      <i class="gg-sun"></i>
+                      <i class="gg-moon"></i>
+                    </div>
+                </label>
+              </div>
+          </nav>
+        </div>
+        <!-- //toggle switch for light and dark theme -->
+    </nav>
   </div>
 </header>
-<!-- Header area end -->
