@@ -48,6 +48,14 @@ class Project extends Model
         'deleted_by'
     ];
 
+    public function getShowImageAttribute()
+    {
+        if ($this->image != null && $this->image != '') {
+            return asset($this->image);
+        }
+        return asset('assets/backend/images/placeholder.jpg');
+    }
+
     public function business_type(){
         return $this->belongsTo(BusinessType::class);
     }

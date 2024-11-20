@@ -14,72 +14,21 @@
                 </div>
                 </div>
                 
-                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="project_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                    <a href="project_details.html">
-                        <div class="projects_img">
-                            <img src="{{ asset('assets/frontend') }}/images/project1.png" alt="">
-                        </div>
+                @foreach ($projects as $project)
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                            <a href="{{ route('frontend.project.details', $project?->slug) }}">
+                                <div class="projects_img">
+                                    <img src="{{ $project?->show_image }}" alt="">
+                                </div>
 
-                        <div class="project_content white_back">
-                            <h4 class="sub_heading primary-text">Mooring Boat</h4>
+                                <div class="project_content white_back">
+                                    <h4 class="sub_heading primary-text">{{$project?->name}}</h4>
+                                </div>
+                            </a> 
                         </div>
-                    </a> 
-                </div>
-                </div>
-
-                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="project_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                    <a href="project_details.html"> 
-                        <div class="projects_img">
-                            <img src="{{ asset('assets/frontend') }}/images/project2.png" alt="">
-                        </div>
-
-                        <div class="project_content white_back">
-                            <h4 class="sub_heading primary-text">45m Power Barge</h4>
-                        </div>
-                    </a> 
-                </div>
-                </div>
-                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="project_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                    <a href="project_details.html"> 
-                        <div class="projects_img">
-                            <img src="{{ asset('assets/frontend') }}/images/project3.png" alt="">
-                        </div>
-
-                        <div class="project_content white_back">
-                            <h4 class="sub_heading primary-text">90m River Push Barge</h4>
-                        </div>
-                    </a>
-                </div>
-                </div>
-                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="project_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                    <a href="project_details.html"> 
-                        <div class="projects_img">
-                            <img src="{{ asset('assets/frontend') }}/images/project4.png" alt="">
-                        </div>
-
-                        <div class="project_content white_back">
-                            <h4 class="sub_heading primary-text">Riverside Jetty</h4>
-                        </div>
-                    </a>
-                </div>
-                </div>
-                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="project_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                    <a href="project_details.html"> 
-                        <div class="projects_img">
-                            <img src="{{ asset('assets/frontend') }}/images/project5.png" alt="">
-                        </div>
-
-                        <div class="project_content white_back">
-                            <h4 class="sub_heading primary-text">Boiler Barge</h4>
-                        </div>
-                    </a>
-                </div>
-                </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

@@ -8,55 +8,26 @@
           <div class="col-12 pt-lg-3">
             <div class="">
                 <div class="text_part text-center">
-                  <h2 class="section_heading primary-text" >All Services</h2>
+                  <h2 class="section_heading primary-text" >{{ $title ?? 'All Services' }}</h2>
                 </div>
             </div>
           </div>
-          
-          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="100">
-            <a href="service_details.html" >
-                <div class="service">
-                  <img class="service-profile-img" src="{{ asset('assets/frontend') }}/images/service1.webp" alt="">
-                  <div class="service-description-bk"></div>
-                  <div class="service-description">
-                      <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          @foreach ($services as $service)
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="100">
+              <a href="{{route('frontend.service.details', $service?->slug)}}" class="service-link">
+                  <div class="service">
+                    <img class="service-profile-img" src="{{ $service?->show_image }}" alt="">
+                    <div class="service-description-bk"></div>
+                    <div class="service-description">
+                        <p class="text-white">{{$service?->name}}</p>
+                    </div>
+                    <div class="service-btn">
+                        <a href="{{route('frontend.service.details', $service?->slug)}}">Details</a>
+                    </div>
                   </div>
-                  <div class="service-btn">
-                      <a href="service_details.html">Details</a>
-                  </div>
-                </div>
-            </a>
-          </div>
-
-          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="200">
-            <a href="service_details.html" >
-                <div class="service">
-                  <img class="service-profile-img" src="{{ asset('assets/frontend') }}/images/service2.webp" alt="">
-                  <div class="service-description-bk"></div>
-                  <div class="service-description">
-                      <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  </div>
-                  <div class="service-btn">
-                      <a href="service_details.html">Details</a>
-                  </div>
-                </div>
-            </a>
-          </div>
-
-          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4" data-aos="fade-up" data-aos-delay="300">
-            <a href="service_details.html" >
-                <div class="service">
-                  <img class="service-profile-img" src="{{ asset('assets/frontend') }}/images/service3.webp" alt="">
-                  <div class="service-description-bk"></div>
-                  <div class="service-description">
-                      <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  </div>
-                  <div class="service-btn">
-                      <a href="service_details.html">Details</a>
-                  </div>
-                </div>
-            </a>
-          </div>
+              </a>
+            </div>
+          @endforeach
       </div>
     </div>
   </section>

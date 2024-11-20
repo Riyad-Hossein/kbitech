@@ -4,9 +4,14 @@ namespace App\Http\Controllers\frontend;
 
 use App\Helpers\ImageUploadHelper;
 use App\Http\Controllers\Controller;
+use App\Models\BusinessType;
 use App\Models\CompanyService;
 use App\Models\Location;
 use App\Models\Partner;
+use App\Models\Project;
+use App\Models\Service;
+use App\Models\ServiceCategory;
+use App\Models\TeamMember;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,75 +30,68 @@ class FrontendController extends Controller
         return view('frontend.pages.about');
     }
 
-    public function servicePage(){
-        return view('frontend.pages.service');
-    }
+    public function servicesByType($typeSlug)
+    {
+        $type = BusinessType::where('slug', $typeSlug)
+            ->where('deleted', BusinessType::DELETED_NO)
+            ->where('status', BusinessType::STATUS_ACTIVE)
+            ->first();
 
-    public function vendorPage(){
-        $data['services'] = CompanyService::where('deleted', CompanyService::DELETED_NO)
-            ->where('status', CompanyService::STATUS_ACTIVE)
+        $data['services'] = Service::where('business_type_id', $type->id)
+            ->where('deleted', Service::DELETED_NO)
+            ->where('status', Service::STATUS_ACTIVE)
             ->get();
 
-        return view('frontend.pages.vendor')->with($data);
+        $data['title'] = 'Services for ' . $type->name;
+
+        return view('frontend.pages.service')->with($data);
     }
 
-    public function storeVendor(Request $request)
+    public function servicesByCategory($categorySlug)
     {
-        $validator = Validator::make($request->all(), [
-            'company_name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'service_area' => 'required',
-            'hours_of_operation' => 'required',
-            'service_id' => 'required',
-            'image' => 'nullable|file',
-        ]);
+        $category = ServiceCategory::where('slug', $categorySlug)
+            ->where('deleted', ServiceCategory::DELETED_NO)
+            ->where('status', ServiceCategory::STATUS_ACTIVE)
+            ->first();
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
+        $data['services'] = Service::where('service_category_id', $category->id)
+            ->where('deleted', Service::DELETED_NO)
+            ->where('status', Service::STATUS_ACTIVE)
+            ->get();
+        $data['title'] = 'Services in ' . $category->name;
+            
+        return view('frontend.pages.service')->with($data);
+    }
 
-        $imagePath = null;
-        if ($request->has('image')) {
-            $image = $request->input('image');
-            $isBase64 = false;
-            if (preg_match('/^data:image\/(\w+);base64,/', $image)) {
-                $isBase64 = true;
-            }
-            $uploadPath = 'vendors';
-            if ($isBase64) {
-                $result = ImageUploadHelper::storeBase64Image($image, $uploadPath, null, 'webp');
-            } else {
-                $file = $request->file('image');
-                $result = ImageUploadHelper::store($file, $uploadPath, null, 'webp');
-            }
+    public function servicetDetails($slug){
+        $data['service'] = Service::where('slug', $slug)
+            ->where('deleted', Service::DELETED_NO)
+            ->where('status', Service::STATUS_ACTIVE)
+            ->first();
 
-            $imagePath = $result['path'];
-        }
-
-        $vendor = new Vendor();
-        $vendor->company_name = $request->company_name;
-        $vendor->address = $request->address;
-        $vendor->city = $request->city;
-        $vendor->state = $request->state;
-        $vendor->zip_code = $request->zip_code;
-        $vendor->email = $request->email;
-        $vendor->phone = $request->phone;
-        $vendor->service_area = $request->service_area;
-        $vendor->hours_of_operation = $request->hours_of_operation;
-        $vendor->service_id = $request->service_id;
-        $vendor->image = $imagePath;
-        $vendor->created_at = now();
-        $vendor->save();
-
-        return redirect()->route('vendor')->with('success', 'Vendor onboarded successfully.');
+        return view('frontend.pages.service_details')->with($data);
     }
 
     public function projectPage(){
-        return view('frontend.pages.project');
+        $data['projects'] = Project::where('deleted', Project::DELETED_NO)
+            ->where('status', Project::STATUS_ACTIVE)
+            ->get();
+        return view('frontend.pages.project')->with($data);
     }
+
+    public function projectDetails($slug){
+        $data['project'] = Project::where('slug', $slug)
+            ->where('deleted', Project::DELETED_NO)
+            ->where('status', Project::STATUS_ACTIVE)
+            ->first();
+        return view('frontend.pages.project_details')->with($data);
+    }
+
     public function teamPage(){
-        return view('frontend.pages.team');
+        $data['teams'] = TeamMember::where('deleted', TeamMember::DELETED_NO)
+            ->where('status', TeamMember::STATUS_ACTIVE)
+            ->get();
+        return view('frontend.pages.team')->with($data);
     }
 
     public function contactPage(){

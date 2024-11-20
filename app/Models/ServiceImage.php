@@ -39,4 +39,12 @@ class ServiceImage extends Model
         'deleted_at',
         'deleted_by'
     ];
+
+    public function getShowImageAttribute()
+    {
+        if ($this->image != null && $this->image != '') {
+            return asset($this->image);
+        }
+        return asset('assets/backend/images/placeholder.jpg');
+    }
 }

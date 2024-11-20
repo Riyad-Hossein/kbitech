@@ -26,7 +26,11 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [FrontendController::class, 'homePage'])->name('frontend.home');
     Route::get('/home', [FrontendController::class, 'homePage'])->name('frontend.home');
     Route::get('/about', [FrontendController::class, 'aboutPage'])->name('frontend.about');
+    Route::get('/services/type/{typeSlug}', [FrontendController::class, 'servicesByType'])->name('services.byType');
+    Route::get('/services/category/{categorySlug}', [FrontendController::class, 'servicesByCategory'])->name('services.byCategory');
+    Route::get('/service/details/{slug}', [FrontendController::class, 'servicetDetails'])->name('frontend.service.details');
     Route::get('/projects', [FrontendController::class, 'projectPage'])->name('frontend.project');
+    Route::get('/projects/{slug}', [FrontendController::class, 'projectDetails'])->name('frontend.project.details');
     Route::get('/team-members', [FrontendController::class, 'teamPage'])->name('frontend.team');
     Route::get('/contact', [FrontendController::class, 'contactPage'])->name('frontend.contact');
 

@@ -26,98 +26,26 @@
                     </div>
                 </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="our-team">
-                        <div class="pic">
-                            <img src="{{ asset('assets/frontend') }}/images/team1.jpg">
+                @foreach ($teams as $team)
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="our-team">
+                            <div class="pic">
+                                <img src="{{ asset('assets/frontend') }}/images/team1.jpg">
+                            </div>
+                            <div class="team-content">
+                                <h3 class="title">{{$team?->name}}</h3>
+                                <span class="post">{{$team?->designation}}
+                                </span>
+                            </div>
+                            <ul class="social">
+                                <li><a href="mailto:{{$team?->email}}" class="fa-brands fa-google" target="_blank"></a></li>
+                                <li><a href="{{$team?->linkedin_url}}" class="fa-brands fa-linkedin" target="_blank"></a></li>
+                                <li><a href="{{$team?->facebook_url}}"  target="_blank" class="fa-brands fa-facebook" target="_blank"></a></li>
+                                <li><a href="{{$team?->twitter_url}}" class="fa-brands fa-x-twitter" target="_blank"></a></li>
+                            </ul>
                         </div>
-                        <div class="team-content">
-                            <h3 class="title">Md. Helal Uddin</h3>
-                            <span class="post">Managing Director
-                            </span>
-                        </div>
-                        <ul class="social">
-                            <li><a href="#"  target="_blank" class="fa-brands fa-facebook"></a></li>
-                            <li><a href="#" class="fa-brands fa-x-twitter"></a></li>
-                            <li><a href="#" class="fa-brands fa-linkedin"></a></li>
-                            <li><a href="#" class="fa-brands fa-instagram"></a></li>
-                        </ul>
                     </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="our-team">
-                        <div class="pic">
-                            <img src="{{ asset('assets/frontend') }}/images/team1.jpg">
-                        </div>
-                        <div class="team-content">
-                            <h3 class="title">Md. Helal Uddin</h3>
-                            <span class="post">Managing Director
-                            </span>
-                        </div>
-                        <ul class="social">
-                            <li><a href="#"  target="_blank" class="fa-brands fa-facebook"></a></li>
-                            <li><a href="#" class="fa-brands fa-x-twitter"></a></li>
-                            <li><a href="#" class="fa-brands fa-linkedin"></a></li>
-                            <li><a href="#" class="fa-brands fa-instagram"></a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="our-team">
-                        <div class="pic">
-                            <img src="{{ asset('assets/frontend') }}/images/team1.jpg">
-                        </div>
-                        <div class="team-content">
-                            <h3 class="title">Md. Helal Uddin</h3>
-                            <span class="post">Managing Director
-                            </span>
-                        </div>
-                        <ul class="social">
-                            <li><a href="#"  target="_blank" class="fa-brands fa-facebook"></a></li>
-                            <li><a href="#" class="fa-brands fa-x-twitter"></a></li>
-                            <li><a href="#" class="fa-brands fa-linkedin"></a></li>
-                            <li><a href="#" class="fa-brands fa-instagram"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="our-team">
-                        <div class="pic">
-                            <img src="{{ asset('assets/frontend') }}/images/team1.jpg">
-                        </div>
-                        <div class="team-content">
-                            <h3 class="title">Md. Helal Uddin</h3>
-                            <span class="post">Managing Director
-                            </span>
-                        </div>
-                        <ul class="social">
-                            <li><a href="#"  target="_blank" class="fa-brands fa-facebook"></a></li>
-                            <li><a href="#" class="fa-brands fa-x-twitter"></a></li>
-                            <li><a href="#" class="fa-brands fa-linkedin"></a></li>
-                            <li><a href="#" class="fa-brands fa-instagram"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="our-team">
-                        <div class="pic">
-                            <img src="{{ asset('assets/frontend') }}/images/team1.jpg">
-                        </div>
-                        <div class="team-content">
-                            <h3 class="title">Md. Helal Uddin</h3>
-                            <span class="post">Managing Director
-                            </span>
-                        </div>
-                        <ul class="social">
-                            <li><a href="#"  target="_blank" class="fa-brands fa-facebook"></a></li>
-                            <li><a href="#" class="fa-brands fa-x-twitter"></a></li>
-                            <li><a href="#" class="fa-brands fa-linkedin"></a></li>
-                            <li><a href="#" class="fa-brands fa-instagram"></a></li>
-                        </ul>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 

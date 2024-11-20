@@ -73,6 +73,6 @@ class User extends Authenticatable
         if ($this->profile_img != null && $this->profile_img != '') {
             return asset($this->profile_img);
         }
-        return asset('assets/images/user.png');
+        return asset('assets/backend/images/user.png');
     }
 }

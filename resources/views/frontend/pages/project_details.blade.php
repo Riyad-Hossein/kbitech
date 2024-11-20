@@ -8,24 +8,24 @@
                 <div class="col-12 pt-lg-3">
                     <div class="section_top">
                         <div class="text_part text-center">
-                            <h2 class="section_heading primary-text" >Mooring Boat</h2>
+                            <h2 class="section_heading primary-text" >{{$project?->name}}</h2>
                         </div>
                     </div>
                     </div>
 
                 <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-info-box" style="margin-top: 0px;">
-                        <p><b>Client:</b> CUPCAKE CO</p>
-                        <p><b>Date:</b> 14.02.2020</p>
-                        <p><b>Team Members:</b> James Doe</p>
-                        <p><b>Business Type:</b> Marine Service</p>
-                        <p><b>Category:</b> Service 1</p>
-                        <p><b>Location:</b> Pohang Port, South Korea</p>
+                        <p><b>Client:</b> {{$project?->client}}</p>
+                        <p><b>Date:</b> {{$project?->project_date}}</p>
+                        <p><b>Team Members:</b> {{$project?->team_members}}</p>
+                        <p><b>Business Type:</b> {{$project?->business_type?->name}}</p>
+                        <p><b>Category:</b> {{$project?->project_category?->name}}</p>
+                        <p><b>Location:</b> {{$project?->location}}</p>
                     </div>
                 </div>
         
                 <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-                    <img src="{{ asset('assets/frontend') }}/images/project1.png" alt="project-image" class="project-details-img rounded">
+                    <img src="{{ $project?->show_image }}" alt="project-image" class="project-details-img rounded">
                     <!-- <div class="project-info-box">
                         <p><b>Categories:</b> Design, Illustration</p>
                         <p><b>Skills:</b> Illustrator</p>
@@ -35,7 +35,7 @@
                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-info-box">
                         <h5>PROJECT DETAILS</h5>
-                        <p class="mb-0">Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel imperdiet est. Pellentesque condimentum, dui et blandit laoreet, quam nisi tincidunt tortor.</p>
+                        {!! $project?->details !!}
                     </div>
                 </div>
 

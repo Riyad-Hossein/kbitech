@@ -4,7 +4,7 @@
 <header id="site-header" class="fixed-top {{ Route::currentRouteName() !== 'frontend.home' ? 'header2' : '' }}">
   <div class="container">
     <nav class="navbar navbar-expand-lg stroke px-0 pt-lg-0 pb-lg-0">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{route('frontend.home')}}">
           <img src="{{ asset('assets/frontend') }}/images/logo3.png" alt="logo" title="logo" style="height:80px;" />
         </a>
         <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
@@ -27,20 +27,18 @@
                     Services <i class="fa-solid fa-chevron-down"></i></a> 
 
                 <div class="dropdown-menu dropdown-right megamenu" aria-labelledby="navbarDropdownMenuLink">
-                    <!-- <div class="px-0 container"> -->
-                      <div class="row">
-                        @foreach($businessTypes as $type)
-                          <div class="col col-md-6 col-lg-6">
-                            <div class="menu-service-category">
-                                <a class="menu-category-title" href="service.html">{{$type?->name}}</a>
-                            </div>
-                            @foreach($type->service_categories as $category)
-                              <a class="dropdown-item" href="#">{{$category?->name}}</a>
-                            @endforeach
-                          </div>
+                  <div class="row">
+                    @foreach($businessTypes as $type)
+                      <div class="col col-md-6 col-lg-6">
+                        <div class="menu-service-category">
+                          <a class="menu-category-title" href="{{ route('services.byType', $type->slug) }}">{{$type?->name}}</a>
+                        </div>
+                        @foreach($type->service_categories as $category)
+                          <a class="dropdown-item" href="{{ route('services.byCategory', $category->slug) }}">{{$category?->name}}</a>
                         @endforeach
                       </div>
-                    <!-- </div> -->
+                    @endforeach
+                  </div>
                 </div>
             </li>
             <li class="nav-item">
