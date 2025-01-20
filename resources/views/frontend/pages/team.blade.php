@@ -30,7 +30,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="our-team">
                             <div class="pic">
-                                <img src="{{ asset('assets/frontend') }}/images/team1.jpg">
+                                <img src="{{$team->show_image}}" alt="team">
                             </div>
                             <div class="team-content">
                                 <h3 class="title">{{$team?->name}}</h3>

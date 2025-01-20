@@ -5,7 +5,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg stroke px-0 pt-lg-0 pb-lg-0">
         <a class="navbar-brand" href="{{route('frontend.home')}}">
-          <img src="{{ asset('assets/frontend') }}/images/logo3.png" alt="logo" title="logo" style="height:80px;" />
+          <img src="{{ asset('assets/frontend') }}/images/kb.png" alt="logo" title="logo" style="height:50px;" />
         </a>
         <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
           data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"

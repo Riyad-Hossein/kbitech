@@ -6,9 +6,9 @@
         <div class="col-lg-3 col-sm-6 footer-list-29 footer-2 mt-lg-0 mt-md-5 mt-4">
           <div class="footer-logo mb-3">
             <h2>
-              <a class="navbar-brand" href="index.html"> KBI <span class="sub-logo">TECH</span>
+              <a class="navbar-brand" href="index.html"> KBI <span class="sub-logo">TEC</span>
                 </span>
-                <span class="sub-title">Ship Design & Services</span>
+                <span class="sub-title">Marine Service & Industrial Equipment Supply.</span>
               </a>
             </h2>
           </div>
@@ -19,7 +19,7 @@
             </li>
             <li>
               <a class="company-info-text" href="mailto:sales@kbshipdesign.com">
-                <span class="fa fa-envelope-o"></span>sales@kbitech.com </a>
+                <span class="fa fa-envelope-o"></span>sales@kbitec.com </a>
             </li>
             <li>
               <span class="fa fa-map-marker"></span> 10 Gwahaksandan-ro 306, Gangseo-gu, Busan, South Korea.
@@ -103,7 +103,7 @@
 <section class="hr-marinetec-copyright">
   <div class="container">
     <div class="row bottom-copies">
-      <p class="col-lg-8 copy-footer-29">© 2024 KBITECH | All Rights Reserved. <span class="footer-developer-by-text">Developed By <a href="https://riyadhossein.com" target="_blank" class="text-decoration-none">Md. Riyad Hossein</a>
+      <p class="col-lg-8 copy-footer-29">© 2024 KBITEC | All Rights Reserved. <span class="footer-developer-by-text">Developed By <a href="https://riyadhossein.com" target="_blank" class="text-decoration-none">Md. Riyad Hossein</a>
         </span>
       </p>
       <div class="col-lg-4 main-social-footer-29">

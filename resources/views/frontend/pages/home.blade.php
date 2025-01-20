@@ -6,14 +6,14 @@
       <div class="hr-marinetec-banner-content py-lg-5 py-4 mt-4">
           <div class="row no-gutters pt-md-5 pt-4 mt-4 align-items-lg-center">
             <div class="col-lg-7 bannerhny-info pr-lg-5">
-                <h5 class="title-subhny mb-2" data-aos="fade-down" data-aos-delay="200" style="font-size: 20px;">KB Ship Design & Services</h5>
-                <h3 class="" data-aos="fade-up" data-aos-delay="200">Excelence in Marine Services.</h3>
-                <p class="mt-3 pr-lg-5" data-aos="fade-up" data-aos-delay="400">Lorem ipsum dolor sit amet consectetur ipsum elit. Qui eligendi vitae sit.Ea ipsum
-                  sed consequuntur illum facere.
-                </p>
-                <a class="btn btn-style btn-outline-light mt-sm-5 mt-4 mr-3" href="">
-                Start Now</a>
-                <a class="btn btn-style btn-white mt-sm-5 mt-4" href="">
+                <h3 class="title-subhny mb-2" data-aos="fade-down" data-aos-delay="200">KBITEC</h3>
+                <h5 class="hr-marinetec-banner-subtitle" data-aos="fade-up" data-aos-delay="200">Excelence in Marine Service & Industrial Equipment Supply.</h5>
+                <!--<p class="mt-3 pr-lg-5" data-aos="fade-up" data-aos-delay="400">Lorem ipsum dolor sit amet consectetur ipsum elit. Qui eligendi vitae sit.Ea ipsum-->
+                <!--  sed consequuntur illum facere.-->
+                <!--</p>-->
+                <a class="btn btn-style btn-outline-light mt-sm-5 mt-4 mr-3" href="{{route('frontend.contact')}}">
+                Contact Now</a>
+                <a class="btn btn-style btn-white mt-sm-5 mt-4" href="#request_quote_section">
                 Get a Quote</a>
             </div>
             <div class="col-lg-5 bannerhny-right pl-lg-5 mt-lg-0 mt-5">
@@ -42,16 +42,26 @@
           <div class="col-lg-4 home-hr-marinetec-content-grid mt-lg-0 mt-4">
             <h5 class="primary-text" >Call Our Support</h5>
             <p class="home-hr-marinetec-content-grid-inf" >
+              <div>
                 <span class="mr-1 company-info-text"><i class="fa-solid fa-phone"></i> </span>
-                <a class="company-info-text" href="tel:+82 10 8717 3709">+82 10 8717 3709
-                </a> , <a class="company-info-text" href="tel:+82 10 3677 3709">+82 10 3677 3709
-                </a>
+                <a class="company-info-text" href="tel:+82(0)70 7626 3709">+82(0)70 7626 3709</a>
+              </div>
+              <div>
+                <span class="mr-1 company-info-text"><i class="fa-solid fa-phone"></i> </span>
+                <a class="company-info-text" href="tel:+82 10 3677 3709">+82 10 3677 3709</a>
+              </div>
             </p>
           </div>
           <div class="col-lg-4 home-hr-marinetec-content-grid px-lg-4 mt-lg-0 mt-4">
             <h5 class="primary-text">Drop a mail</h5>
-            <span class="mr-1 company-info-text"><i class="fa-solid fa-envelope"></i> </span> 
-            <a class="company-info-text" href="mailto:sales@kbshipdesign.com">sales@kbshipdesign.com</a>
+            <div>
+              <span class="mr-1 company-info-text"><i class="fa-solid fa-envelope"></i> </span> 
+              <a class="company-info-text" href="mailto:sales@kbshipdesign.com">sales@kbitec.com</a>
+            </div>
+            <div>
+              <span class="mr-1 company-info-text"><i class="fa-solid fa-envelope"></i> </span> 
+              <a class="company-info-text" href="mailto:sales@kbshipdesign.com">sales@kbshipdesign.com</a>
+            </div>
           </div>
           <div class="col-lg-4 home-hr-marinetec-content-grid mt-lg-0 mt-4">
             <h5 class="primary-text" >Corporate Office</h5>
@@ -250,7 +260,7 @@
 </section>           
 
 <!-- //hr-marinetec-content-2-->
-<section class="hr-marinetec-form-12 close-menu-toggle">
+<section class="hr-marinetec-form-12 close-menu-toggle" id="request_quote_section">
     <div class="hr-marinetec-form-12-content py-5">
       <div class="container py-md-5">
           <div class="title-content text-center">
@@ -279,7 +289,7 @@
                       <textarea placeholder="Describe your issue" class="form-input"></textarea>
                   </div>
                   <div class="text-right">
-                      <button type="submit" class="btn btn-primary btn-style mt-3">Send Mail</button>
+                      <button type="submit" class="btn btn-primary btn-style mt-3">Request Quote</button>
                   </div>
                 </form>
             </div>
@@ -291,7 +301,7 @@
                   <p>We understand the importance approaching each work integrally and believe in the power of simple and
                       easy communication.
                   </p>
-                  <a class="btn btn-style btn-white mt-sm-5 mt-4" href="contact.html">
+                  <a class="btn btn-style btn-white mt-sm-5 mt-4" href="{{route('frontend.contact')}}">
                   Contact Us</a>
                 </div>
             </div>
