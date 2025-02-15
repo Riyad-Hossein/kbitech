@@ -6,7 +6,7 @@
             @csrf
             <div class="d-flex justify-content-center align-items-center gap-4 mb-3">
                 <a class="d-flex align-items-center" href="{{ url('/') }}">
-                    <img src="{{ asset('assets/backend/images/logo3.png') }}" alt="logo">
+                    <img src="{{ asset('assets/backend/images/logo.png') }}" style="width: 60px;" alt="logo">
                     <!-- <span style="padding-left: 10px" class="d-flex align-items-center">
                         <img width="150" src="{{ asset('assets/backend/images/logo-text.png') }}" alt="logo">
                     </span> -->

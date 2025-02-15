@@ -1,7 +1,7 @@
 <div class="sidebar-area" id="sidebar-area">
     <div class="logo position-relative">
         <a href="{{ route('dashboard') }}" class="d-block text-decoration-none">
-            <img src="{{ asset('assets/backend') }}/images/logo3.png" alt="logo-icon" style="height: 50px;">
+            <img src="{{ asset('assets/backend') }}/images/logo.png" alt="logo-icon" style="height: 50px;">
             <span class="logo-text fw-bold text-dark" style="padding-left: 10px;">KBITEC</span>
             <!-- <span class="logo-text fw-bold text-dark"><img class="logo-text-img" src="{{ asset('assets/backend') }}/images/logo-text.png" alt="Hivance"></span> -->
         </a>
